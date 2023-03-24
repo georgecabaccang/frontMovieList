@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes detailsFadeIn {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes detailsFadeOut {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.cont {
+    height: 100%;
+    width: 100%;
+}
+
+.details-block {
+    height: 100%;
+    background: black;
+}
+
+.cont:hover .details-block {
+    animation: detailsFadeIn 0.4s;
+    animation-fill-mode: forwards;
+}
+
+.cut-description {
+    --max-lines: 6;
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-lines);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
