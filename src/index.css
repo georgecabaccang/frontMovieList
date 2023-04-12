@@ -47,8 +47,24 @@
     animation-fill-mode: forwards;
 }
 
+.xxsFontSize {
+    font-size: xx-small;
+}
+
+.xsFontSize {
+    font-size: x-small;
+}
+
+.sFontSize {
+    font-size: small;
+}
+
+.mFontSize {
+    font-size: medium;
+}
+
 .cut-description {
-    --max-lines: 6;
+    --max-lines: 4;
 
     display: -webkit-box;
     overflow: hidden;

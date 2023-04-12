@@ -49,35 +49,35 @@ export default function Movie(props: movieDetailsType) {
                 )}
             </div>
 
-            <div className="flex rounded overflow-hidden shadow-lg bg-orange-100 h-[25em]">
+            <div className="flex rounded overflow-hidden shadow-lg bg-orange-100 h-[15em]">
                 <div className="cont">
                     <div className="flex-1 marker:px-6 h-full">
-                        <div className="grid grid-cols-1 place-items-center h-full">
+                        <div className="grid grid-cols-1 place-items-center">
                             <Image
-                                styles={"object-fit h-[13em] min-w-full"}
+                                styles={"object-fit h-[15em] min-w-full"}
                                 src={props.image}
                                 alt={`${props.title}-image`}
                             />
                         </div>
-                        <div className="grid grid-cols-1 details-block text-white p-3">
-                            <div className="font-bold text-xl mb-2">
+                        <div className="grid grid-cols-1 details-block h-[15em] text-white p-3">
+                            <div className="font-bold text-xl mb-2 h-[1em] mFontSize">
                                 {props.title}
                             </div>
-                            <div>
-                                <h4>{`Rating: ${props.rating}/5`}</h4>
+                            <div className="h-full">
+                                <h4 className="sFontSize">{`Rating: ${props.rating}/5`}</h4>
                             </div>
-                            <div className="h-48">
-                                <p className="text-base break-words cut-description">
+                            <div className="h-[7em]">
+                                <p className="text-base break-words cut-description xsFontSize">
                                     {props.description}
                                 </p>
                             </div>
                             <div>
-                                <h3 className="text-xs my-2">{`Added: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}</h3>
+                                <h3 className="xxsFontSize my-2">{`Added: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}</h3>
                             </div>
-                            <div className="grid grid-cols-2 gap-4 h-10">
+                            <div className="grid grid-cols-2 gap-1 h-[3em] place-items-center sFontSize">
                                 <Button
                                     styles={
-                                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-700 rounded"
                                     }
                                     type={"button"}
                                     name={"Update"}
@@ -85,7 +85,7 @@ export default function Movie(props: movieDetailsType) {
                                 />
                                 <Button
                                     styles={
-                                        "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                        "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-1 px-2 hover:text-white border border-blue-500 hover:border-transparent rounded"
                                     }
                                     type={"button"}
                                     name={"Remove"}

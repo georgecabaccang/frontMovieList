@@ -41,7 +41,7 @@ export default function Input(props: InputProps<string | number>) {
 
     return (
         <div>
-            <label>{props.label}</label>
+            <label className="block">{props.label}</label>
             <input
                 maxLength={50}
                 className={props.styles}

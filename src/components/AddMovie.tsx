@@ -67,9 +67,9 @@ export default function AddMovie() {
         return console.log(movieAdded);
     };
     return (
-        <div className="grid lg:grid-cols-1 place-items-center">
+        <div className="grid place-items-center">
             <form onSubmit={addMovieHandler}>
-                <div className="max-w-sm w-full lg:max-w-full lg:flex">
+                <div className="max-w-sm lg:max-w-full lg:flex">
                     {image && !lessThanLargeScreen && (
                         <Image
                             src={image}
@@ -80,7 +80,7 @@ export default function AddMovie() {
                         />
                     )}
                     <div
-                        className={`border-r border-b border-l border-gray-400 lg:${
+                        className={`md:w-[25em] border-r border-b border-l border-gray-400 lg:${
                             image == "" ? "border-l rounded-l" : "border-l-0"
                         } border-t lg:border-gray-400 bg-white rounded-t rounded lg:rounded-l-none lg:rounded-t-none lg:rounded-b lg:rounded-r p-4 flex flex-col justify-center leading-normal`}
                     >
@@ -101,7 +101,7 @@ export default function AddMovie() {
                         />
                         <Input
                             styles={
-                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-7"
                             }
                             label="Movie Title"
                             type="text"
@@ -118,7 +118,7 @@ export default function AddMovie() {
                         />
                         <Input
                             styles={
-                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-7"
                             }
                             label="Rating"
                             type="number"
@@ -126,6 +126,9 @@ export default function AddMovie() {
                             field={"rating"}
                         />
                         <Button
+                            styles={`${
+                                isValid ? "bg-blue-400" : "bg-gray-200"
+                            } border p-1 mt-2 border-`}
                             name="Add Movie"
                             type="submit"
                             disabled={!isValid}
