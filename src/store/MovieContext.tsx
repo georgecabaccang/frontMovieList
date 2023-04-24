@@ -19,12 +19,7 @@ export const MovieProvider = (props: MovieProps) => {
     const [movies, setMovies] = useState<Array<movieDetailsType>>([]);
 
     const getMovies = async () => {
-        const response = await fetch(
-            "https://movie-backend-project.netlify.app/getMovies",
-            {
-                headers: { "access-control-allow-orgigin": "*" },
-            }
-        );
+        const response = await fetch("http://localhost:8000/movies/getMovies");
         const loadedMovies = await response.json();
         setMovies(
             loadedMovies.sort(
