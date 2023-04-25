@@ -7,7 +7,7 @@ export default function AllMovies() {
     const movieContext = useContext(MovieContext);
 
     return (
-        <ul className="grid grid-cols-5 gap-10 py-3 mx-14">
+        <ul className="grid grid-cols-5 gap-3 py-3 mx-14">
             {movieContext?.movies?.map((movie) => {
                 return (
                     <Movie

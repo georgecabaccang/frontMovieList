@@ -8,32 +8,18 @@ import UpdateModal from "./UpdateModal";
 
 import "../index.css";
 import Image from "./reusables/Image";
+import RemoveModal from "./RemoveModal";
 
 export default function Movie(props: movieDetailsType) {
-    const [showModal, setShowModal] = useState(false);
-    const movieContext = useContext(MovieContext);
-
-    const removeMovieHandler = async () => {
-        let deleted;
-        if (props._id) {
-            deleted = await removeMovie(props._id);
-        }
-        if (deleted == true) {
-            return movieContext.getMovies();
-        }
-        return console.log(deleted);
-    };
-
-    const updateModalHandler = () => {
-        setShowModal(true);
-    };
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showRemoveModal, setShowRemoveModal] = useState(false);
 
     const date = new Date(props.date);
 
     return (
         <li>
             <div>
-                {showModal ? (
+                {showUpdateModal ? (
                     <UpdateModal
                         _id={props._id}
                         image={props.image}
@@ -41,15 +27,30 @@ export default function Movie(props: movieDetailsType) {
                         description={props.description}
                         rating={props.rating}
                         date={props.date}
-                        getterProps={showModal}
-                        setterProps={setShowModal}
+                        getterProps={showUpdateModal}
+                        setterProps={setShowUpdateModal}
                     />
                 ) : (
                     false
                 )}
             </div>
-
-            <div className="flex rounded overflow-hidden shadow-lg bg-orange-100 h-[15em]">
+            <div>
+                {showRemoveModal ? (
+                    <RemoveModal
+                        _id={props._id}
+                        image={props.image}
+                        title={props.title}
+                        description={props.description}
+                        rating={props.rating}
+                        date={props.date}
+                        getterProps={showRemoveModal}
+                        setterProps={setShowRemoveModal}
+                    />
+                ) : (
+                    false
+                )}
+            </div>
+            <div className="flex overflow-hidden shadow-2xl shadow-gray-500 h-[15em]">
                 <div className="cont">
                     <div className="flex-1 marker:px-6 h-full">
                         <div className="grid grid-cols-1 place-items-center">
@@ -81,7 +82,9 @@ export default function Movie(props: movieDetailsType) {
                                     }
                                     type={"button"}
                                     name={"Update"}
-                                    onClickFunction={() => updateModalHandler()}
+                                    onClickFunction={() =>
+                                        setShowUpdateModal(true)
+                                    }
                                 />
                                 <Button
                                     styles={
@@ -89,7 +92,9 @@ export default function Movie(props: movieDetailsType) {
                                     }
                                     type={"button"}
                                     name={"Remove"}
-                                    onClickFunction={() => removeMovieHandler()}
+                                    onClickFunction={() =>
+                                        setShowRemoveModal(true)
+                                    }
                                 />
                             </div>
                         </div>
