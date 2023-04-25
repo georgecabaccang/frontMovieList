@@ -1,11 +1,12 @@
 import { movieDetailsType } from "../../types/movieType";
 
-const backendURL = "https://movie-backend-project.netlify.app";
+const backendURL =
+    "https://movies-back-project.netlify.app/.netlify/functions/server/";
 
 export const addMovie = async (
     movieDetails: movieDetailsType
 ): Promise<boolean> => {
-    const response = await fetch(`${backendURL}/movies/addMovie`, {
+    const response = await fetch(`${backendURL}addMovie`, {
         method: "POST",
         body: JSON.stringify(movieDetails),
         headers: {
@@ -22,7 +23,7 @@ export const addMovie = async (
 export const updateMovie = async (
     updatedDetails: movieDetailsType
 ): Promise<boolean> => {
-    const response = await fetch(`/mo${backendURL}vies/updateMovie`, {
+    const response = await fetch(`${backendURL}updateMovie`, {
         method: "PATCH",
         body: JSON.stringify(updatedDetails),
         headers: {
@@ -39,7 +40,7 @@ export const updateMovie = async (
 export const removeMovie = async (movieId: string) => {
     if (movieId === "") return console.log("Movie does not exist.");
 
-    const response = await fetch(`/mo${backendURL}vies/removeMovie`, {
+    const response = await fetch(`${backendURL}removeMovie`, {
         method: "DELETE",
         body: JSON.stringify({
             _id: movieId,
