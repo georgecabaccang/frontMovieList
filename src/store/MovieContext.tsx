@@ -20,8 +20,8 @@ export const MovieProvider = (props: MovieProps) => {
 
     const getMovies = async () => {
         const response = await fetch(
-            // "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
-            "http://localhost:8001/.netlify/functions/server/getMovies"
+            "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
+            // "http://localhost:8001/.netlify/functions/server/getMovies"
         );
         const loadedMovies = await response.json();
         setMovies(
