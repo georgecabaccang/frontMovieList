@@ -49,7 +49,7 @@ export default function Navigation() {
 
     return (
         <nav
-            className={`grid grid-cols-2 px-10 py-5 mb-10 text-white xs:text-xs sm:text-sm md:text-lg lg:text-lg border-b border-slate-700 sticky top-0 bg-black z-10 shadow-gray-500 ${checkScrollValue} `}
+            className={`grid grid-cols-2 px-10 py-5 xxs:mb-2 mb-10 text-white xxs:text-[0.62em] xs:text-xs sm:text-sm md:text-lg lg:text-lg border-b border-slate-700 sticky top-0 bg-black z-10 shadow-gray-500 ${checkScrollValue} `}
         >
             <header>Your Movies</header>
             <ul className="flex place-content-end">

@@ -2,7 +2,6 @@ import { movieDetailsType } from "../../types/movieType";
 
 const backendURL =
     "https://movies-back-project.netlify.app/.netlify/functions/server/";
-    // "http://localhost:8001/.netlify/functions/server/";
 
 export const addMovie = async (
     movieDetails: movieDetailsType
