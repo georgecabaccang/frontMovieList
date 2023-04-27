@@ -7,6 +7,7 @@ export default function Navigation() {
     const [checkScrollValue, setCheckScrollValue] = useState("");
     const location = useLocation();
 
+    // Controls color of Links depending on location
     useEffect(() => {
         setActiveLink(location.pathname);
     }, [location]);
@@ -15,6 +16,7 @@ export default function Navigation() {
         setScrollValue(number);
     };
 
+    // Add listener to scrolling on mount
     useEffect(() => {
         document.addEventListener("scroll", () =>
             scrollValueHandler(window.scrollY)
@@ -27,6 +29,7 @@ export default function Navigation() {
         };
     }, []);
 
+    // Controls shadow of navbar
     useEffect(() => {
         if (scrollValue == 0) {
             setCheckScrollValue("");
@@ -46,10 +49,10 @@ export default function Navigation() {
 
     return (
         <nav
-            className={`grid grid-cols-2 px-10 py-5 mb-10 text-white text-xl border-b border-slate-700 sticky top-0 bg-black z-50 shadow-gray-500 ${checkScrollValue}`}
+            className={`grid grid-cols-2 px-10 py-5 mb-10 text-white xs:text-xs sm:text-sm md:text-lg lg:text-lg border-b border-slate-700 sticky top-0 bg-black z-10 shadow-gray-500 ${checkScrollValue} `}
         >
             <header>Your Movies</header>
-            <ul className="flex place-content-end last:pr-3">
+            <ul className="flex place-content-end">
                 <li
                     className={`pl-5 hover:text-gray-500 ${
                         activeLink == "/" ? "text-gray-500" : ""

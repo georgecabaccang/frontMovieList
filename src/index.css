@@ -25,6 +25,74 @@ body::-webkit-scrollbar {
     }
 }
 
+/* @media only screen and (min-width: 320px) {
+    @keyframes detailsFadeIn {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(-100%);
+        }
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    @keyframes detailsFadeIn {
+        0% {
+            transform: translateY(-120%);
+        }
+        100% {
+            transform: translateY(-125%);
+        }
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    @keyframes detailsFadeIn {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(-100%);
+        }
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    @keyframes detailsFadeIn {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(-100%);
+        }
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+} */
+
 @keyframes detailsFadeOut {
     0% {
         transform: translateY(-100%);
@@ -88,4 +156,9 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+.file-button::file-selector-button {
+    background-color: rgb(166, 166, 166);
+    color: rgb(0, 0, 0);
 }

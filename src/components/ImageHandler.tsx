@@ -31,9 +31,7 @@ export default function ImageHandler(props: ImageProps) {
 
     return (
         <Input
-            styles={
-                "block w-full text-sm border rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:border-gray-600"
-            }
+            styles={"block w-full text-sm cursor-pointer file-button"}
             label="Movie Poster"
             type="file"
             field="movieImage"

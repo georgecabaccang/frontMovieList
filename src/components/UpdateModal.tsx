@@ -88,7 +88,7 @@ export default function UpdateModal(props: movieDetailsType) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity z-100" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -102,7 +102,7 @@ export default function UpdateModal(props: movieDetailsType) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg p-3">
+                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-black text-left shadow-lg transition-all sm:my-8 sm:w-full sm:max-w-lg p-3 shadow-gray-500 text-gray-300">
                                 <form onSubmit={onSubmitHandler}>
                                     <ImageHandler
                                         imageGetter={updatedImage}
@@ -110,7 +110,7 @@ export default function UpdateModal(props: movieDetailsType) {
                                     />
                                     <Input
                                         styles={
-                                            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 text-white"
                                         }
                                         label={"Movie Title"}
                                         type={"text"}
@@ -120,7 +120,7 @@ export default function UpdateModal(props: movieDetailsType) {
                                     />
                                     <Input
                                         styles={
-                                            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 text-white"
                                         }
                                         label={"Rating"}
                                         type={"number"}
@@ -130,7 +130,7 @@ export default function UpdateModal(props: movieDetailsType) {
                                     />
                                     <TextArea
                                         styles={
-                                            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 text-white"
                                         }
                                         label={"Description"}
                                         type={"text"}
@@ -138,7 +138,7 @@ export default function UpdateModal(props: movieDetailsType) {
                                         value={updatedDescription}
                                     />
 
-                                    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                    <div className="bg-black px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 ">
                                         <Button
                                             name="Update Movie"
                                             type="submit"
