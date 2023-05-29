@@ -20,7 +20,8 @@ export const MovieProvider = (props: MovieProps) => {
 
     const getMovies = async () => {
         const response = await fetch(
-            "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
+            // "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
+            "https://back-movie-list-ovea.vercel.app/server/getMovies"
         );
         const loadedMovies = await response.json();
         setMovies(

@@ -1,7 +1,8 @@
 import { movieDetailsType } from "../../types/movieType";
 
 const backendURL =
-    "https://movies-back-project.netlify.app/.netlify/functions/server/";
+    // "https://movies-back-project.netlify.app/.netlify/functions/server/";
+    "https://back-movie-list-ovea.vercel.app/server/";
 
 export const addMovie = async (
     movieDetails: movieDetailsType
