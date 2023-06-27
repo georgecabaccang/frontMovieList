@@ -18,14 +18,10 @@ export default function Navigation() {
 
     // Add listener to scrolling on mount
     useEffect(() => {
-        document.addEventListener("scroll", () =>
-            scrollValueHandler(window.scrollY)
-        );
+        document.addEventListener("scroll", () => scrollValueHandler(window.scrollY));
 
         return () => {
-            document.removeEventListener("scroll", () =>
-                scrollValueHandler(window.scrollY)
-            );
+            document.removeEventListener("scroll", () => scrollValueHandler(window.scrollY));
         };
     }, []);
 
@@ -37,12 +33,10 @@ export default function Navigation() {
         }
         if (scrollValue > 0 && scrollValue <= 2) {
             setCheckScrollValue("shadow-sm");
-            console.log(scrollValue);
             return;
         }
         if (scrollValue >= 5 && scrollValue <= 10) {
             setCheckScrollValue("shadow-md");
-            console.log(scrollValue);
             return;
         }
     }, [scrollValue]);
@@ -51,14 +45,16 @@ export default function Navigation() {
         <nav
             className={`grid grid-cols-2 px-10 py-5 xxs:mb-2 mb-10 text-white xxs:text-[0.62em] xs:text-xs sm:text-sm md:text-lg lg:text-lg border-b border-slate-700 sticky top-0 bg-black z-10 shadow-gray-500 ${checkScrollValue} `}
         >
-            <header>Your Movies</header>
+            <header>
+                <Link to="/">Home</Link>
+            </header>
             <ul className="flex place-content-end">
                 <li
                     className={`pl-5 hover:text-gray-500 ${
-                        activeLink == "/" ? "text-gray-500" : ""
+                        activeLink == "/movies" ? "text-gray-500" : ""
                     }`}
                 >
-                    <Link to="/">Movies</Link>
+                    <Link to="/movies">Movies</Link>
                 </li>
                 <li
                     className={`pl-5 hover:text-gray-500 ${

@@ -1,10 +1,4 @@
-import React, {
-    FormEvent,
-    useContext,
-    useState,
-    Fragment,
-    useRef,
-} from "react";
+import React, { FormEvent, useContext, useState, Fragment, useRef } from "react";
 import { MovieContext } from "../store/MovieContext";
 import { movieDetailsType } from "../types/movieType";
 import Button from "./reusables/Button";
@@ -14,6 +8,8 @@ import ImageHandler from "./ImageHandler";
 
 import { Dialog, Transition } from "@headlessui/react";
 import TextArea from "./reusables/TextArea";
+import Swal from "sweetalert2";
+import Image from "./reusables/Image";
 
 export default function UpdateModal(props: movieDetailsType) {
     const movieContext = useContext(MovieContext);
@@ -22,9 +18,7 @@ export default function UpdateModal(props: movieDetailsType) {
     const [updatedImage, setUpdateImage] = useState(props.image);
     const [updatedMovieTitle, setUpdatedMovieTitle] = useState(props.title);
     const [updatedRating, setUpdatedRating] = useState(props.rating);
-    const [updatedDescription, setUpdatedDescription] = useState(
-        props.description
-    );
+    const [updatedDescription, setUpdatedDescription] = useState(props.description);
 
     const prevTitle = props.title;
     const prevDescription = props.description;
@@ -65,6 +59,10 @@ export default function UpdateModal(props: movieDetailsType) {
 
         const movieUpdated = await updateMovie(updatedDetails);
         if (movieUpdated == true && props.getterProps) {
+            Swal.fire({
+                icon: "success",
+                text: "Movie Updated!",
+            });
             movieContext.getMovies();
             return props.setterProps?.(false);
         }
@@ -75,7 +73,7 @@ export default function UpdateModal(props: movieDetailsType) {
         <Transition.Root show={props.getterProps} as={Fragment}>
             <Dialog
                 as="div"
-                className="relative z-10"
+                className="relative z-20"
                 initialFocus={cancelButtonRef}
                 onClose={() => props.setterProps?.(false)}
             >
@@ -104,6 +102,15 @@ export default function UpdateModal(props: movieDetailsType) {
                         >
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-black text-left shadow-lg transition-all sm:my-8 sm:w-full sm:max-w-lg p-3 shadow-gray-500 text-gray-300">
                                 <form onSubmit={onSubmitHandler}>
+                                    <div  className="flex place-content-center">
+                                        <Image
+                                            src={updatedImage}
+                                            alt={updatedImage}
+                                            styles={
+                                                "lg:rounded-r-none border-gray-400 max-h-[15em] max-w-[10em] flex-none bg-cover text-center overflow-hidden"
+                                            }
+                                        />
+                                    </div>
                                     <ImageHandler
                                         imageGetter={updatedImage}
                                         imageSetter={setUpdateImage}
@@ -148,9 +155,7 @@ export default function UpdateModal(props: movieDetailsType) {
                                             name="Cancel"
                                             type="button"
                                             styles="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                                            onClickFunction={() =>
-                                                props.setterProps?.(false)
-                                            }
+                                            onClickFunction={() => props.setterProps?.(false)}
                                         />
                                     </div>
                                 </form>

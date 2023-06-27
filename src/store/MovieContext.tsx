@@ -21,18 +21,14 @@ export const MovieProvider = (props: MovieProps) => {
     const getMovies = async () => {
         const response = await fetch(
             // "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
-            "https://back-movie-list-ovea.vercel.app/server/getMovies"
+            // "https://back-movie-list-ovea.vercel.app/server/getMovies"
+            "http://localhost:8001/movies/getMovies"
         );
         const loadedMovies = await response.json();
         setMovies(
-            loadedMovies.sort(
-                (
-                    movieOne: movieDetailsType,
-                    movieTwo: movieDetailsType
-                ): number => {
-                    return movieOne.date > movieTwo.date ? -1 : 1;
-                }
-            )
+            loadedMovies.sort((movieOne: movieDetailsType, movieTwo: movieDetailsType): number => {
+                return movieOne.date > movieTwo.date ? -1 : 1;
+            })
         );
     };
 
@@ -46,8 +42,6 @@ export const MovieProvider = (props: MovieProps) => {
     };
 
     return (
-        <MovieContext.Provider value={MovieContextValues}>
-            {props.children}
-        </MovieContext.Provider>
+        <MovieContext.Provider value={MovieContextValues}>{props.children}</MovieContext.Provider>
     );
 };

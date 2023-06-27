@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MovieContext } from "../store/MovieContext";
 import { movieDetailsType } from "../types/movieType";
 import ImageHandler from "./ImageHandler";
+import Swal from "sweetalert2";
 
 import Button from "./reusables/Button";
 import Input from "./reusables/Input";
@@ -61,47 +62,48 @@ export default function AddMovie() {
 
         const movieAdded = await addMovie(movieDetails);
         if (movieAdded == true) {
+            Swal.fire({
+                icon: "success",
+                title: "Movie Added!",
+            });
             movieContext.getMovies();
-            return navigate("/");
+            return navigate("/movies");
         }
-        return console.log(movieAdded);
     };
+
     return (
-        <div className="grid place-items-center">
+        <div className="grid place-items-center mt-10">
             <form onSubmit={addMovieHandler}>
-                <div className="max-w-sm lg:max-w-full lg:flex">
+                <div className="max-w-sm lg:max-w-full lg:flex text-gray-300">
                     {image && !lessThanLargeScreen && (
                         <Image
                             src={image}
                             alt={movieTitle}
                             styles={
-                                "border-t border-l border-b rounded lg:rounded-r-none border-gray-400 h-auto w-60 flex-none bg-cover text-center overflow-hidden"
+                                "rounded border-gray-400 max-h-[24em] max-w-[13em] flex-none bg-cover text-center overflow-hidden"
                             }
                         />
                     )}
                     <div
                         className={`md:w-[25em] border-r border-b border-l border-gray-400 lg:${
                             image == "" ? "border-l rounded-l" : "border-l-0"
-                        } border-t lg:border-gray-400 bg-white rounded-t rounded lg:rounded-l-none lg:rounded-t-none lg:rounded-b lg:rounded-r p-4 flex flex-col justify-center leading-normal`}
+                        } border-t lg:border-gray-400 text-white rounded-t rounded p-4 flex flex-col justify-center leading-normal`}
                     >
                         {image && lessThanLargeScreen && (
-                            <div className="grid grid-cols-1 place-items-center">
+                            <div className="flex place-content-center">
                                 <Image
                                     src={image}
                                     alt={movieTitle}
                                     styles={
-                                        "border-t border-l border-b rounded lg:rounded-r-none border-gray-400 h-60 h-auto w-40 flex-none bg-cover text-center overflow-hidden"
+                                        "lg:rounded-r-none border-gray-400 max-h-[15em] max-w-[10em] flex-none bg-cover text-center overflow-hidden"
                                     }
                                 />
                             </div>
                         )}
-                        <ImageHandler
-                            imageGetter={image}
-                            imageSetter={setImage}
-                        />
+                        <ImageHandler imageGetter={image} imageSetter={setImage} />
                         <Input
                             styles={
-                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-7"
+                                "shadow appearance-none border rounded w-full leading-tight focus:outline-none focus:shadow-outline h-7 bg-gray-800 text-gray-300 py-4 px-3"
                             }
                             label="Movie Title"
                             type="text"
@@ -110,7 +112,7 @@ export default function AddMovie() {
                         />
                         <TextArea
                             styles={
-                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                "shadow appearance-none border rounded w-full leading-tight focus:outline-none focus:shadow-outline bg-gray-800 text-gray-300 py-2 px-3"
                             }
                             label="Description"
                             type="string"
@@ -118,7 +120,7 @@ export default function AddMovie() {
                         />
                         <Input
                             styles={
-                                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-7"
+                                "shadow appearance-none border rounded w-full leading-tight focus:outline-none focus:shadow-outline h-7 bg-gray-800 text-gray-300 py-4 px-3"
                             }
                             label="Rating"
                             type="number"
@@ -127,8 +129,8 @@ export default function AddMovie() {
                         />
                         <Button
                             styles={`${
-                                isValid ? "bg-blue-400" : "bg-gray-200"
-                            } border p-1 mt-2 border-`}
+                                isValid ? "bg-blue-500 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500"
+                            } p-1 mt-2 rounded `}
                             name="Add Movie"
                             type="submit"
                             disabled={!isValid}

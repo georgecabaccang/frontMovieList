@@ -2,11 +2,10 @@ import { movieDetailsType } from "../../types/movieType";
 
 const backendURL =
     // "https://movies-back-project.netlify.app/.netlify/functions/server/";
-    "https://back-movie-list-ovea.vercel.app/server/";
+    // "https://back-movie-list-ovea.vercel.app/server/";
+    "http://localhost:8001/movies/";
 
-export const addMovie = async (
-    movieDetails: movieDetailsType
-): Promise<boolean> => {
+export const addMovie = async (movieDetails: movieDetailsType): Promise<boolean> => {
     const response = await fetch(`${backendURL}addMovie`, {
         method: "POST",
         body: JSON.stringify(movieDetails),
@@ -21,9 +20,7 @@ export const addMovie = async (
     return data;
 };
 
-export const updateMovie = async (
-    updatedDetails: movieDetailsType
-): Promise<boolean> => {
+export const updateMovie = async (updatedDetails: movieDetailsType): Promise<boolean> => {
     const response = await fetch(`${backendURL}updateMovie`, {
         method: "PATCH",
         body: JSON.stringify(updatedDetails),
@@ -56,4 +53,16 @@ export const removeMovie = async (movieId: string) => {
         return true;
     }
     return data;
+};
+
+export const getMovieDetailsRequest = async (movie_id: string) => {
+    try {
+        const response = await fetch(`${backendURL}getMovieDetails/${movie_id}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        if (error instanceof Error) {
+            return error;
+        }
+    }
 };
