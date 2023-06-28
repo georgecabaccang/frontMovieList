@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMovieDetailsRequest } from "./services/MoviesServices";
 import { useParams } from "react-router-dom";
 import Image from "./reusables/Image";
+import { MutatingDots } from "react-loader-spinner";
 
 interface IMoveDetails {
     _id: string;
@@ -14,14 +15,17 @@ interface IMoveDetails {
 
 export default function DetailsPage() {
     const [movieDetails, setMovieDetails] = useState<IMoveDetails>();
+    const [isLoading, setIsLoading] = useState(true);
     const dateAdded = new Date(movieDetails?.date!);
 
     const { movie_id } = useParams();
 
     const getMovieDetails = async () => {
+        setIsLoading(true);
         if (movie_id) {
             const movieDetails = await getMovieDetailsRequest(movie_id);
             setMovieDetails(movieDetails);
+            return setIsLoading(false);
         }
     };
 
@@ -29,14 +33,29 @@ export default function DetailsPage() {
         getMovieDetails();
     }, []);
     return (
-        <div className="flex place-content-center items-center text-gray-200 min-w-full max-h-[32em] mt-10">
-            {movieDetails && (
-                <div className="grid grid-cols-3 max-w-[50em] max-h-[25em] min-h-[25em] border border-gray-700 rounded-md shadow-md shadow-gray-500">
+        <div className="flex place-content-center items-center text-gray-200 min-w-full max-h-[32em] mt-10 xxs:mt-0 xxs:min-h-[100vh]">
+            {isLoading && (
+                <div className="w-full h-[20em] flex place-content-center items-center">
+                    <MutatingDots
+                        height="100"
+                        width="100"
+                        color="#6699CC"
+                        secondaryColor="#6699CC"
+                        radius="12.5"
+                        ariaLabel="mutating-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                    />
+                </div>
+            )}
+            {movieDetails && !isLoading && (
+                <div className="grid grid-cols-3 xs:p-5 xxs:grid-cols-2 xxs:flex xxs:flex-col xxs:min-h-full xxs:max-h-[full] max-w-[50em] xxs:border-none xxs:shadow-none min-h-[25em] border border-gray-700 rounded-md shadow-md shadow-gray-500">
                     <div className="flex col-span-1 container place-content-center items-center">
                         <Image
                             src={movieDetails.image}
                             alt={movieDetails.title}
-                            styles="max-h-[25em] min-w-[15em]"
+                            styles="max-h-[25em] xxs:max-h-[13em] xxs:max-w-[8em] xxs:min-h-[13em] xxs:min-w-[8em]"
                         />
                     </div>
                     <div className="col-span-2 grid grid-cols-1 py-5 px-4">
@@ -45,7 +64,7 @@ export default function DetailsPage() {
                             <div className="text-[0.8em]">Rating: {movieDetails.rating}/5</div>
                         </div>
                         <div>
-                            <div className="text-[0.9em] min-h-[15em]">
+                            <div className="text-[0.9em] md:max-h-[15em] md:min-h-[9em] md:mb-0 xxs:my-5">
                                 {movieDetails.description}
                             </div>
                             <div className="text-[1em]">
@@ -56,7 +75,7 @@ export default function DetailsPage() {
                     </div>
                 </div>
             )}
-            {!movieDetails && <div>Movie Not Found</div>}
+            {!movieDetails && !isLoading && <div>Movie Not Found</div>}
         </div>
     );
 }

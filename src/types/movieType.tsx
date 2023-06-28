@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface movieDetailsType {
+export interface IMovieDetailsType {
     _id?: string;
     image: string;
     title: string;

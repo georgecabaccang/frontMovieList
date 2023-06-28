@@ -17,7 +17,7 @@ export default function TextArea(props: TextAreaProps<string | number>) {
                 style={{ minWidth: "100%" }}
                 value={props.value}
                 rows={5}
-                maxLength={250}
+                maxLength={500}
                 onChange={(event) => props.setDescription?.(event.target.value)}
             />
         </div>

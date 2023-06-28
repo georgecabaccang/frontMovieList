@@ -1,6 +1,6 @@
 import React, { FormEvent, useContext, useState, Fragment, useRef } from "react";
 import { MovieContext } from "../store/MovieContext";
-import { movieDetailsType } from "../types/movieType";
+import { IMovieDetailsType } from "../types/movieType";
 import Button from "./reusables/Button";
 import Input from "./reusables/Input";
 import { updateMovie } from "./services/MoviesServices";
@@ -11,7 +11,7 @@ import TextArea from "./reusables/TextArea";
 import Swal from "sweetalert2";
 import Image from "./reusables/Image";
 
-export default function UpdateModal(props: movieDetailsType) {
+export default function UpdateModal(props: IMovieDetailsType) {
     const movieContext = useContext(MovieContext);
     const cancelButtonRef = useRef(null);
 
@@ -48,7 +48,7 @@ export default function UpdateModal(props: movieDetailsType) {
     const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const updatedDetails: movieDetailsType = {
+        const updatedDetails: IMovieDetailsType = {
             _id: props._id,
             image: emptyImage ? prevImage : updatedImage,
             title: emptyTile ? prevTitle : updatedMovieTitle,

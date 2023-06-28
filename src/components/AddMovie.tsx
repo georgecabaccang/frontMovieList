@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { MovieContext } from "../store/MovieContext";
-import { movieDetailsType } from "../types/movieType";
+import { IMovieDetailsType } from "../types/movieType";
 import ImageHandler from "./ImageHandler";
 import Swal from "sweetalert2";
 
@@ -52,7 +52,7 @@ export default function AddMovie() {
     const addMovieHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const movieDetails: movieDetailsType = {
+        const movieDetails: IMovieDetailsType = {
             image: image,
             title: movieTitle,
             rating: rating,

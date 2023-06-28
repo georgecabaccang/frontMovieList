@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { movieDetailsType } from "../types/movieType";
+import { IMovieDetailsType } from "../types/movieType";
 import { MovieContext } from "../store/MovieContext";
 import { removeMovie } from "./services/MoviesServices";
 import Swal from "sweetalert2";
 
-export default function RemoveModal(props: movieDetailsType) {
+export default function RemoveModal(props: IMovieDetailsType) {
     const movieContext = useContext(MovieContext);
 
     const removeMovieHandler = async () => {

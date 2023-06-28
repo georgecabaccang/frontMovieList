@@ -1,11 +1,11 @@
-import { movieDetailsType } from "../../types/movieType";
+import { IMovieDetailsType } from "../../types/movieType";
 
 const backendURL =
     // "https://movies-back-project.netlify.app/.netlify/functions/server/";
     // "https://back-movie-list-ovea.vercel.app/server/";
     "http://localhost:8001/movies/";
 
-export const addMovie = async (movieDetails: movieDetailsType): Promise<boolean> => {
+export const addMovie = async (movieDetails: IMovieDetailsType): Promise<boolean> => {
     const response = await fetch(`${backendURL}addMovie`, {
         method: "POST",
         body: JSON.stringify(movieDetails),
@@ -20,7 +20,7 @@ export const addMovie = async (movieDetails: movieDetailsType): Promise<boolean>
     return data;
 };
 
-export const updateMovie = async (updatedDetails: movieDetailsType): Promise<boolean> => {
+export const updateMovie = async (updatedDetails: IMovieDetailsType): Promise<boolean> => {
     const response = await fetch(`${backendURL}updateMovie`, {
         method: "PATCH",
         body: JSON.stringify(updatedDetails),

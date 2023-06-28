@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { movieDetailsType } from "../types/movieType";
+import { IMovieDetailsType } from "../types/movieType";
 
 interface ValueType {
-    movies: Array<movieDetailsType>;
+    movies: Array<IMovieDetailsType>;
     getMovies: () => void;
 }
 
@@ -16,7 +16,7 @@ export const MovieContext = createContext<ValueType>({
 });
 
 export const MovieProvider = (props: MovieProps) => {
-    const [movies, setMovies] = useState<Array<movieDetailsType>>([]);
+    const [movies, setMovies] = useState<Array<IMovieDetailsType>>([]);
 
     const getMovies = async () => {
         const response = await fetch(
@@ -26,7 +26,7 @@ export const MovieProvider = (props: MovieProps) => {
         );
         const loadedMovies = await response.json();
         setMovies(
-            loadedMovies.sort((movieOne: movieDetailsType, movieTwo: movieDetailsType): number => {
+            loadedMovies.sort((movieOne: IMovieDetailsType, movieTwo: IMovieDetailsType): number => {
                 return movieOne.date > movieTwo.date ? -1 : 1;
             })
         );

@@ -5,7 +5,6 @@ import Navigation from "./components/ui/Navigation";
 import AllMovies from "./components/AllMovies";
 import AddMovie from "./components/AddMovie";
 import { MovieProvider } from "./store/MovieContext";
-import MovieDetails from "./components/MovieDetails";
 import Home from "./components/Home";
 import DetailsPage from "./components/DetailsPage";
 
@@ -18,7 +17,6 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/movies" element={<AllMovies />} />
                     <Route path="/add-movie" element={<AddMovie />} />
-                    <Route path="/movie/:id" element={<MovieDetails />} />
                     <Route path="/movies/:movie_title/:movie_id" element={<DetailsPage />} />
                 </Routes>
             </MovieProvider>
