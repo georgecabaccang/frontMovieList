@@ -20,9 +20,9 @@ export const MovieProvider = (props: MovieProps) => {
 
     const getMovies = async () => {
         const response = await fetch(
-            // "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
-            "https://back-movie-list.vercel.app/movies/getMovies"
-            // "http://localhost:8001/movies/getMovies"
+            "https://back-movie-list.vercel.app/movies/getMovies",
+            // "http://localhost:8001/movies/getMovies,"
+            { mode: "cors", credentials: "omit", headers: { "Content-Type": "application/json" } }
         );
         const loadedMovies = await response.json();
         setMovies(
