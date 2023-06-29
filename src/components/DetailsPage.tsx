@@ -33,7 +33,7 @@ export default function DetailsPage() {
         getMovieDetails();
     }, []);
     return (
-        <div className="flex place-content-center items-center text-gray-200 min-w-full max-h-[32em] mt-10 xxs:mt-0 xxs:min-h-[100vh]">
+        <div className="flex place-content-center text-gray-200 min-h-[100vh] min-w-full lg:mt-14 lg:max-h-[10em] lg:min-h-[10em] xxs:mt-5 ">
             {isLoading && (
                 <div className="w-full h-[20em] flex place-content-center items-center">
                     <MutatingDots
@@ -50,24 +50,24 @@ export default function DetailsPage() {
                 </div>
             )}
             {movieDetails && !isLoading && (
-                <div className="grid grid-cols-3 xs:p-5 xxs:grid-cols-2 xxs:flex xxs:flex-col xxs:min-h-full xxs:max-h-[full] max-w-[50em] xxs:border-none xxs:shadow-none min-h-[25em] border border-gray-700 rounded-md shadow-md shadow-gray-500">
-                    <div className="flex col-span-1 container place-content-center items-center">
+                <div className=" lg:grid grid-cols-3 lg:grid-cols-5 lg:border lg:p-0 lg:border-gray-700 lg:min-h-[25em] lg:rounded-md lg:shadow-md lg:shadow-gray-500 xs:p-5 xxs:grid-cols-2 flex xxs:flex-col xxs:min-h-full xxs:max-h-[full] max-w-[50em]">
+                    <div className="col-span-1 grid lg:col-span-2 container place-content-center items-center">
                         <Image
                             src={movieDetails.image}
                             alt={movieDetails.title}
-                            styles="max-h-[25em] xxs:max-h-[13em] xxs:max-w-[8em] xxs:min-h-[13em] xxs:min-w-[8em]"
+                            styles="lg:max-h-[24.9em] lg:min-h-[24em] lg:max-w-[20em] lg:min-w-[20em] lg:rounded-l-md xxs:max-h-[13em] xxs:max-w-[8em] xxs:min-h-[13em] xxs:min-w-[8em]"
                         />
                     </div>
-                    <div className="col-span-2 grid grid-cols-1 py-5 px-4">
+                    <div className="col-span-2 grid grid-cols-1 lg:py-10 lg:pr-10 lg:pl-10 lg:col-span-3 py-5 px-4">
                         <div className="max-h-[5em]">
                             <div className="font-bold text-[1.5em]">{movieDetails.title}</div>
                             <div className="text-[0.8em]">Rating: {movieDetails.rating}/5</div>
                         </div>
                         <div>
-                            <div className="text-[0.9em] md:max-h-[15em] md:min-h-[9em] md:mb-0 xxs:my-5">
+                            <div className="text-[0.9em] md:max-h-[15em] lg:mt-0 md:min-h-[9em] md:mb-0 xxs:my-5">
                                 {movieDetails.description}
                             </div>
-                            <div className="text-[1em]">
+                            <div className="text-[1em] lg:mt-5">
                                 Date Added: {dateAdded.toLocaleDateString()}{" "}
                                 {dateAdded.toLocaleTimeString()}
                             </div>

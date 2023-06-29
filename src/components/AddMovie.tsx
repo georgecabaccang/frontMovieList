@@ -80,7 +80,7 @@ export default function AddMovie() {
                             src={image}
                             alt={movieTitle}
                             styles={
-                                "rounded border-gray-400 max-h-[24em] max-w-[13em] flex-none bg-cover text-center overflow-hidden"
+                                "rounded border-gray-400 max-h-[24em] max-w-[13em] flex-none bg-cover text-center overflow-hidden lg:max-h-[24.9em] lg:min-h-[24em] lg:max-w-[20em] lg:min-w-[20em]"
                             }
                         />
                     )}
@@ -129,7 +129,9 @@ export default function AddMovie() {
                         />
                         <Button
                             styles={`${
-                                isValid ? "bg-blue-500 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500"
+                                isValid
+                                    ? "bg-blue-500 text-white hover:bg-blue-700"
+                                    : "bg-gray-200 text-gray-500"
                             } p-1 mt-2 rounded `}
                             name="Add Movie"
                             type="submit"
