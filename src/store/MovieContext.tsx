@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { IMovieDetailsType } from "../types/movieType";
+import axios from "axios";
 
 interface ValueType {
     movies: Array<IMovieDetailsType>;
@@ -19,18 +20,15 @@ export const MovieProvider = (props: MovieProps) => {
     const [movies, setMovies] = useState<Array<IMovieDetailsType>>([]);
 
     const getMovies = async () => {
-        const response = await fetch(
-            "https://back-movie-list.vercel.app/movies/getMovies",
-            // "http://localhost:8001/movies/getMovies,"
-            { mode: "cors", credentials: "omit", headers: { "Content-Type": "application/json" } }
+        const { data } = await axios(
+            "https://back-movie-list.vercel.app/movies/getMovies"
+            // "http://localhost:8001/movies/getMovies"
         );
-        const loadedMovies = await response.json();
+
         setMovies(
-            loadedMovies.sort(
-                (movieOne: IMovieDetailsType, movieTwo: IMovieDetailsType): number => {
-                    return movieOne.date > movieTwo.date ? -1 : 1;
-                }
-            )
+            data.sort((movieOne: IMovieDetailsType, movieTwo: IMovieDetailsType): number => {
+                return movieOne.date > movieTwo.date ? -1 : 1;
+            })
         );
     };
 
