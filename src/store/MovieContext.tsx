@@ -21,8 +21,14 @@ export const MovieProvider = (props: MovieProps) => {
 
     const getMovies = async () => {
         const { data } = await axios(
-            "https://back-movie-list.vercel.app/movies/getMovies"
+            "https://back-movie-list.vercel.app/movies/getMovies",
             // "http://localhost:8001/movies/getMovies"
+            {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                },
+            }
         );
 
         setMovies(
