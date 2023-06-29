@@ -21,14 +21,16 @@ export const MovieProvider = (props: MovieProps) => {
     const getMovies = async () => {
         const response = await fetch(
             // "https://movies-back-project.netlify.app/.netlify/functions/server/getMovies"
-            // "https://back-movie-list-ovea.vercel.app/server/getMovies"
-            "http://localhost:8001/movies/getMovies"
+            "https://back-movie-list.vercel.app/movies/getMovies"
+            // "http://localhost:8001/movies/getMovies"
         );
         const loadedMovies = await response.json();
         setMovies(
-            loadedMovies.sort((movieOne: IMovieDetailsType, movieTwo: IMovieDetailsType): number => {
-                return movieOne.date > movieTwo.date ? -1 : 1;
-            })
+            loadedMovies.sort(
+                (movieOne: IMovieDetailsType, movieTwo: IMovieDetailsType): number => {
+                    return movieOne.date > movieTwo.date ? -1 : 1;
+                }
+            )
         );
     };
 
