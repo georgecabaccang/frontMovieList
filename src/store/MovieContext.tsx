@@ -20,12 +20,12 @@ export const MovieProvider = (props: MovieProps) => {
     const [movies, setMovies] = useState<Array<IMovieDetailsType>>([]);
 
     const getMovies = async () => {
-        const { data } = await axios(
+        const { data } = await axios.get(
             "https://back-movie-list.vercel.app/movies/getMovies",
             // "http://localhost:8001/movies/getMovies"
             {
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": "https://front-movie-list.vercel.app",
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
                 },
             }
