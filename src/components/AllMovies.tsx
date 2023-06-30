@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { MovieContext } from "../store/MovieContext";
+import { useEffect, useMemo, useState } from "react";
 
 import Movie from "./Movie";
 import { IMovieDetailsType } from "../types/movieType";
 import { useSearchParams } from "react-router-dom";
 import { MutatingDots } from "react-loader-spinner";
+import { getMoviesRequest } from "./services/MoviesServices";
+import Swal from "sweetalert2";
+import { AxiosError, AxiosResponse } from "axios";
 
 export default function AllMovies() {
-    const [movies, setMovies] = useState<Array<IMovieDetailsType>>();
+    const [movies, setMovies] = useState<Array<IMovieDetailsType>>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const movieContext = useContext(MovieContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const filteredMovies = useMemo(() => {
@@ -18,15 +19,32 @@ export default function AllMovies() {
             return movies.title.toLowerCase().includes(searchParams.get("movie")!);
         });
         if (returnedMovies?.length == 0) {
+            setIsLoading(false);
             return movies;
         } else {
+            setIsLoading(false);
             return returnedMovies;
         }
     }, [movies, searchParams]);
 
+    const getMovies = async () => {
+        setIsLoading(true);
+        const response = (await getMoviesRequest()) as AxiosResponse;
+        if (response?.status == 200) {
+            setMovies(response?.data.toReversed());
+        } else if (response.status == 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Your Not Connected To The Inernet",
+                text: "Please Check Your Connection.",
+            });
+        }
+        setIsLoading(false);
+    };
+
     useEffect(() => {
-        setMovies(movieContext.movies);
-    }, [movieContext.movies]);
+        getMovies();
+    }, []);
 
     return (
         <div className="flex flex-col place-items-center">
@@ -43,8 +61,8 @@ export default function AllMovies() {
                     Search
                 </button> */}
             </div>
-            {filteredMovies?.length == 0 && !isLoading && <div>No Movies Added Yet</div>}
-            {filteredMovies?.length == 0 && isLoading && (
+            {movies?.length == 0 && !isLoading && <div>No Movies Added Yet</div>}
+            {isLoading && (
                 <div className="flex text-white min-h-[30em] place-content-center items-center font-bold">
                     <MutatingDots
                         height="100"
@@ -59,7 +77,7 @@ export default function AllMovies() {
                     />
                 </div>
             )}
-            {filteredMovies?.length != 0 && (
+            {filteredMovies?.length != 0 && !isLoading && (
                 <div className="my-6 mb-20 md:mt-2 xxs:mt-10">
                     <ul className="grid xxs:grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 3xl:grid-cols-8 gap-3 py-3 xxs:mx-3 xs:mx-3 md:mx-10 lg:mx-14">
                         {filteredMovies?.map((movie) => {

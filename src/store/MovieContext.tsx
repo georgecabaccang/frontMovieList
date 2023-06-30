@@ -21,8 +21,8 @@ export const MovieProvider = (props: MovieProps) => {
 
     const getMovies = async () => {
         const { data } = await axios.get(
-            "https://back-movie-list.vercel.app/movies/getMovies"
-            // "http://localhost:8001/movies/getMovies"
+            // "https://back-movie-list.vercel.app/movies/getMovies"
+            "http://localhost:8001/movies/getMovies"
         );
 
         setMovies(
@@ -32,9 +32,9 @@ export const MovieProvider = (props: MovieProps) => {
         );
     };
 
-    useEffect(() => {
-        getMovies();
-    }, []);
+    // useEffect(() => {
+    //     getMovies();
+    // }, []);
 
     const MovieContextValues: ValueType = {
         movies: movies,

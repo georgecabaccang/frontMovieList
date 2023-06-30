@@ -1,9 +1,26 @@
+import axios, { Axios, AxiosError, AxiosResponse } from "axios";
 import { IMovieDetailsType } from "../../types/movieType";
 
 const backendURL =
-    // "https://movies-back-project.netlify.app/.netlify/functions/server/";
-    "https://back-movie-list.vercel.app/movies/";
-// "http://localhost:8001/movies/";
+    // "https://back-movie-list.vercel.app/movies/";
+    "http://localhost:8001/movies/";
+
+interface IAxiosResponse {
+    data: {};
+    status: number;
+}
+export const getMoviesRequest = async () => {
+    try {
+        const response = await axios.get(`${backendURL}/getMovies`);
+        return response;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.code == "ERR_NETWORK") {
+                return { status: 0 };
+            }
+        }
+    }
+};
 
 export const addMovie = async (movieDetails: IMovieDetailsType): Promise<boolean> => {
     const response = await fetch(`${backendURL}addMovie`, {
