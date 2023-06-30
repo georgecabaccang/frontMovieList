@@ -59,9 +59,10 @@ export default function Movie(props: IMovieDetailsType) {
                                 alt={`${props.title}-image`}
                             />
                         </div>
-                        <div className="absolute top-0 2xl:max-w-[12em] 2xl:min-w-[11em] xl:max-w-[9.8em] xl:min-w-[9.8em] lg:max-h-[15em] lg:min-h-[15em] lg:max-w-[11em] lg:min-w-[10.2em] lg:p-3 md:max-h-[14em] md:min-h-[14em] md:max-w-[10.2em] md:min-w-[10.2em] sm:max-h-[12em] sm:max-w-[9em] sm:min-w-[9em] semi-sm:min-w-[8em] xs:max-h-[12.55em] xs:min-h-[11em] xs:max-w-[6.8em] xs:min-w-[6.7em] xs:p-2 xxs:max-h-[10em] xxs:min-h-[12em] xxs:max-w-[1em] min-w-full p-3 hover:opacity-100 z-10 bg-black opacity-0 text-white hover:border border-gray-500 rounded">
+
+                        <div className="absolute top-0 xs:p-2 min-h-full min-w-full p-3 hover:opacity-100 z-10 bg-black opacity-0 text-white hover:border border-gray-500 rounded">
                             <Link to={`/movies/${props.title}/${props._id}`}>
-                                <div className="font-bold mb-2 2xl:h-[1.5em] xl:text-[1.2em] xl:min-w-[6.8em] xl:max-w-[6.8em] lg:h-[1.3em] lg:min-w-[9.3rem] lg:max-w-[9.3rem] lg:text-[1.3em] md:max-w-[7.8rem] md:text-lg md:h-[1.5em] xs:text-xs xxs:text-[0.8em] xxs:truncate xxs:text-ellipsis xxs:overflow-hidden ">
+                                <div className="font-bold mb-2 xl:text-[1.2em] lg:p-[0.1em] lg:text-[1.3em] w-[6.7em] md:text-lg xs:text-xs xxs:text-[0.8em] truncate text-ellipsis overflow-hidden h-full ">
                                     {props.title}
                                 </div>
                                 <div className="h-full">
