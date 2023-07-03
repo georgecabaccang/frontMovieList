@@ -1,18 +1,23 @@
-import React, { FormEvent, useContext, useState, Fragment, useRef } from "react";
-import { MovieContext } from "../store/MovieContext";
+import { FormEvent, useContext, useState, Fragment, useRef, useDebugValue } from "react";
 import { IMovieDetailsType } from "../types/movieType";
 import Button from "./reusables/Button";
 import Input from "./reusables/Input";
-import { updateMovie } from "./services/MoviesServices";
+import { updateMovieRequest } from "./services/MoviesServices";
 import ImageHandler from "./ImageHandler";
 
 import { Dialog, Transition } from "@headlessui/react";
 import TextArea from "./reusables/TextArea";
 import Swal from "sweetalert2";
 import Image from "./reusables/Image";
+import { AxiosResponse } from "axios";
 
-export default function UpdateModal(props: IMovieDetailsType) {
-    const movieContext = useContext(MovieContext);
+interface IUpdateModal extends IMovieDetailsType {
+    getMovies: () => void;
+    getterProps: boolean;
+    setterProps: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function UpdateModal(props: IUpdateModal) {
     const cancelButtonRef = useRef(null);
 
     const [updatedImage, setUpdateImage] = useState(props.image);
@@ -45,6 +50,19 @@ export default function UpdateModal(props: IMovieDetailsType) {
         emptyImage = true;
     }
 
+    const updatedMovieDetails = (updatedValue: {
+        image: string;
+        title: string;
+        description: string;
+        rating: number;
+    }) => {
+        setUpdateImage(updatedValue.image);
+        setUpdatedMovieTitle(updatedValue.title);
+        setUpdatedDescription(updatedValue.description);
+        setUpdatedRating(updatedValue.rating);
+        props.getMovies();
+    };
+
     const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -57,14 +75,14 @@ export default function UpdateModal(props: IMovieDetailsType) {
             date: props.date,
         };
 
-        const movieUpdated = await updateMovie(updatedDetails);
-        if (movieUpdated == true && props.getterProps) {
+        const movieUpdated = (await updateMovieRequest(updatedDetails)) as AxiosResponse;
+        if (movieUpdated.status == 200 && props.getterProps) {
+            updatedMovieDetails(movieUpdated.data);
             Swal.fire({
                 icon: "success",
                 text: "Movie Updated!",
             });
-            movieContext.getMovies();
-            return props.setterProps?.(false);
+            props.setterProps?.(false);
         }
         return console.log(movieUpdated);
     };
@@ -102,7 +120,7 @@ export default function UpdateModal(props: IMovieDetailsType) {
                         >
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-black text-left shadow-lg transition-all sm:my-8 sm:w-full sm:max-w-lg p-3 shadow-gray-500 text-gray-300">
                                 <form onSubmit={onSubmitHandler}>
-                                    <div  className="flex place-content-center">
+                                    <div className="flex place-content-center">
                                         <Image
                                             src={updatedImage}
                                             alt={updatedImage}

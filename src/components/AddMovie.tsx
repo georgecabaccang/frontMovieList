@@ -1,6 +1,5 @@
 import React, { useEffect, useState, FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { MovieContext } from "../store/MovieContext";
 import { IMovieDetailsType } from "../types/movieType";
 import ImageHandler from "./ImageHandler";
 import Swal from "sweetalert2";
@@ -9,7 +8,7 @@ import Button from "./reusables/Button";
 import Input from "./reusables/Input";
 import TextArea from "./reusables/TextArea";
 import Image from "./reusables/Image";
-import { addMovie } from "./services/MoviesServices";
+import { addMovieRequest } from "./services/MoviesServices";
 
 export default function AddMovie() {
     const [movieTitle, setMovieTitle] = useState("");
@@ -20,8 +19,6 @@ export default function AddMovie() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [lessThanLargeScreen, setLessThanLargeScreen] = useState(false);
     const navigate = useNavigate();
-
-    const movieContext = useContext(MovieContext);
 
     useEffect(() => {
         if (movieTitle && rating && description && image) {
@@ -60,13 +57,12 @@ export default function AddMovie() {
             date: Date.now(),
         };
 
-        const movieAdded = await addMovie(movieDetails);
-        if (movieAdded == true) {
+        const movieAdded = await addMovieRequest(movieDetails);
+        if (movieAdded.status == 200) {
             Swal.fire({
                 icon: "success",
                 title: "Movie Added!",
             });
-            movieContext.getMovies();
             return navigate("/movies");
         }
     };

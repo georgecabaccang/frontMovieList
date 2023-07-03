@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export interface IMovieDetailsType {
     _id?: string;
     image: string;
@@ -7,6 +5,4 @@ export interface IMovieDetailsType {
     rating: number;
     description: string;
     date: number;
-    getterProps?: boolean;
-    setterProps?: Dispatch<SetStateAction<boolean>>;
 }

@@ -1,20 +1,15 @@
-import axios, { Axios, AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import { IMovieDetailsType } from "../../types/movieType";
 
-const backendURL =
-    // "https://back-movie-list.vercel.app/movies/";
-    "http://localhost:8001/movies/";
+// const myAxios = axios.create({ baseURL: "http://localhost:8001/movies/" });
+const myAxios = axios.create({ baseURL: "https://back-movie-list.vercel.app/movies/" });
 
-interface IAxiosResponse {
-    data: {};
-    status: number;
-}
 export const getMoviesRequest = async () => {
     try {
-        const response = await axios.get(`${backendURL}/getMovies`);
+        const response = await myAxios.get(`/getMovies`);
         return response;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
+        if (error instanceof AxiosError) {
             if (error.code == "ERR_NETWORK") {
                 return { status: 0 };
             }
@@ -22,61 +17,35 @@ export const getMoviesRequest = async () => {
     }
 };
 
-export const addMovie = async (movieDetails: IMovieDetailsType): Promise<boolean> => {
-    const response = await fetch(`${backendURL}addMovie`, {
-        method: "POST",
-        body: JSON.stringify(movieDetails),
-        headers: {
-            "Content-Type": "application/json",
-        },
+export const addMovieRequest = async (movieDetails: IMovieDetailsType) => {
+    const response = await myAxios.post(`/addMovie`, {
+        movieDetails: movieDetails,
     });
-    const data = await response.json();
-    if (data == true) {
-        return true;
-    }
-    return data;
+    return response;
 };
 
-export const updateMovie = async (updatedDetails: IMovieDetailsType): Promise<boolean> => {
-    const response = await fetch(`${backendURL}updateMovie`, {
-        method: "PATCH",
-        body: JSON.stringify(updatedDetails),
-        headers: {
-            "Content-Type": "application/json",
-        },
+export const updateMovieRequest = async (updatedDetails: IMovieDetailsType) => {
+    const response = await myAxios.patch(`/updateMovie`, {
+        updatedDetails: updatedDetails,
     });
-    const data = await response.json();
-    if (data == true) {
-        return true;
-    }
-    return data;
+    return response;
 };
 
-export const removeMovie = async (movieId: string) => {
-    if (movieId === "") return console.log("Movie does not exist.");
-
-    const response = await fetch(`${backendURL}removeMovie`, {
-        method: "DELETE",
-        body: JSON.stringify({
-            _id: movieId,
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    const data = await response.json();
-    if (data == true) {
-        return true;
+export const removeMovieRequest = async (movieId: string) => {
+    try {
+        const response = await myAxios.delete(`/removeMovie/${movieId}`);
+        return response;
+    } catch (error) {
+        if (error instanceof Error) {
+            return error.message;
+        }
     }
-    return data;
 };
 
 export const getMovieDetailsRequest = async (movie_id: string) => {
     try {
-        const response = await fetch(`${backendURL}getMovieDetails/${movie_id}`);
-        const data = await response.json();
-        return data;
+        const response = await myAxios.get(`/getMovieDetails/${movie_id}`);
+        return response;
     } catch (error) {
         if (error instanceof Error) {
             return error;

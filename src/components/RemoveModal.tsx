@@ -1,25 +1,32 @@
 import React, { useContext } from "react";
 import { IMovieDetailsType } from "../types/movieType";
-import { MovieContext } from "../store/MovieContext";
-import { removeMovie } from "./services/MoviesServices";
+import { removeMovieRequest } from "./services/MoviesServices";
 import Swal from "sweetalert2";
+import { AxiosResponse } from "axios";
 
-export default function RemoveModal(props: IMovieDetailsType) {
-    const movieContext = useContext(MovieContext);
+interface IRemoveMovie extends IMovieDetailsType {
+    getMovies: () => void;
+    getterProps: boolean;
+    setterProps: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export default function RemoveModal(props: IRemoveMovie) {
     const removeMovieHandler = async () => {
-        let deleted;
-        if (props._id) {
-            deleted = await removeMovie(props._id);
-        }
-        if (deleted == true) {
+        console.log(props._id);
+        const response = (await removeMovieRequest(props._id!)) as AxiosResponse;
+        if (response.data == true) {
             Swal.fire({
                 icon: "info",
-                title: "Movie Removed!",
+                title: `"${props.title}" has been removed.`,
             });
-            return movieContext.getMovies();
+            props.setterProps(false);
+            return props.getMovies();
         }
-        return console.log(deleted);
+        props.setterProps(false);
+        return Swal.fire({
+            icon: "error",
+            title: "Movie not found",
+        });
     };
 
     return (
@@ -61,7 +68,8 @@ export default function RemoveModal(props: IMovieDetailsType) {
                                     </h3>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            Are you sure you want remove this movie from the list?
+                                            Are you sure you want remove "
+                                            <strong>{props.title}</strong>" from the list?
                                         </p>
                                     </div>
                                 </div>

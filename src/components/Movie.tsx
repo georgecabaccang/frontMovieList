@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import { IMovieDetailsType } from "../types/movieType";
 
 import Button from "./reusables/Button";
@@ -9,7 +9,11 @@ import Image from "./reusables/Image";
 import RemoveModal from "./RemoveModal";
 import { Link } from "react-router-dom";
 
-export default function Movie(props: IMovieDetailsType) {
+interface IMovieComp extends IMovieDetailsType {
+    getMovies: () => void;
+}
+
+export default function Movie(props: IMovieComp) {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
@@ -18,7 +22,7 @@ export default function Movie(props: IMovieDetailsType) {
     return (
         <li>
             <div>
-                {showUpdateModal ? (
+                {showUpdateModal && (
                     <UpdateModal
                         _id={props._id}
                         image={props.image}
@@ -28,13 +32,12 @@ export default function Movie(props: IMovieDetailsType) {
                         date={props.date}
                         getterProps={showUpdateModal}
                         setterProps={setShowUpdateModal}
+                        getMovies={props.getMovies}
                     />
-                ) : (
-                    false
                 )}
             </div>
             <div>
-                {showRemoveModal ? (
+                {showRemoveModal && (
                     <RemoveModal
                         _id={props._id}
                         image={props.image}
@@ -44,9 +47,8 @@ export default function Movie(props: IMovieDetailsType) {
                         date={props.date}
                         getterProps={showRemoveModal}
                         setterProps={setShowRemoveModal}
+                        getMovies={props.getMovies}
                     />
-                ) : (
-                    false
                 )}
             </div>
             <div className="flex overflow-hidden drop-shadow-[0_4px_4px_rgba(255,255,255,0.6)] lg:h-[15em] md:h-[14em] sm:h-[12em] xs:h-[11em] xxs:h-[12em] relative rounded">

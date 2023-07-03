@@ -3,6 +3,8 @@ import { getMovieDetailsRequest } from "./services/MoviesServices";
 import { useParams } from "react-router-dom";
 import Image from "./reusables/Image";
 import { MutatingDots } from "react-loader-spinner";
+import { AxiosResponse } from "axios";
+import Swal from "sweetalert2";
 
 interface IMoveDetails {
     _id: string;
@@ -16,6 +18,7 @@ interface IMoveDetails {
 export default function DetailsPage() {
     const [movieDetails, setMovieDetails] = useState<IMoveDetails>();
     const [isLoading, setIsLoading] = useState(true);
+    const [isMovieFound, setIsMovieFound] = useState(false);
     const dateAdded = new Date(movieDetails?.date!);
 
     const { movie_id } = useParams();
@@ -23,8 +26,17 @@ export default function DetailsPage() {
     const getMovieDetails = async () => {
         setIsLoading(true);
         if (movie_id) {
-            const movieDetails = await getMovieDetailsRequest(movie_id);
-            setMovieDetails(movieDetails);
+            const response = (await getMovieDetailsRequest(movie_id)) as AxiosResponse;
+            if (response.data != "movie not found") {
+                setIsMovieFound(true);
+                setMovieDetails(response.data);
+            } else {
+                setIsMovieFound(false);
+                Swal.fire({
+                    icon: "error",
+                    title: "Movie Not Found",
+                });
+            }
             return setIsLoading(false);
         }
     };
@@ -49,7 +61,7 @@ export default function DetailsPage() {
                     />
                 </div>
             )}
-            {movieDetails && !isLoading && (
+            {movieDetails && !isLoading && isMovieFound && (
                 <div className=" lg:grid grid-cols-3 lg:grid-cols-5 lg:border lg:p-0 lg:border-gray-700 lg:min-h-[25em] lg:rounded-md lg:shadow-md lg:shadow-gray-500 xs:p-5 xxs:grid-cols-2 flex xxs:flex-col xxs:min-h-full xxs:max-h-[full] max-w-[50em]">
                     <div className="col-span-1 grid lg:col-span-2 container place-content-center items-center">
                         <Image
@@ -75,7 +87,7 @@ export default function DetailsPage() {
                     </div>
                 </div>
             )}
-            {!movieDetails && !isLoading && <div>Movie Not Found</div>}
+            {!isLoading && !isMovieFound && <div>Movie Not Found</div>}
         </div>
     );
 }

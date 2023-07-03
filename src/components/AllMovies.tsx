@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { MutatingDots } from "react-loader-spinner";
 import { getMoviesRequest } from "./services/MoviesServices";
 import Swal from "sweetalert2";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 
 export default function AllMovies() {
     const [movies, setMovies] = useState<Array<IMovieDetailsType>>([]);
@@ -90,6 +90,7 @@ export default function AllMovies() {
                                     rating={movie.rating}
                                     description={movie.description}
                                     date={movie.date}
+                                    getMovies={getMovies}
                                 />
                             );
                         })}
