@@ -28,6 +28,7 @@ export const updateMovieRequest = async (updatedDetails: IMovieDetailsType) => {
     const response = await myAxios.patch(`/updateMovie`, {
         updatedDetails: updatedDetails,
     });
+    
     return response;
 };
 
