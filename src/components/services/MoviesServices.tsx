@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { IMovieDetailsType } from "../../types/movieType";
 
-// const myAxios = axios.create({ baseURL: "http://localhost:8001/movies/" });
-const myAxios = axios.create({ baseURL: "https://back-movie-list.vercel.app/movies/" });
+// const myAxios = axios.create({ baseURL: "http://localhost:8001/movies" });
+const myAxios = axios.create({ baseURL: "https://back-movie-list.vercel.app/movies" });
 
 export const getMoviesRequest = async () => {
     try {
